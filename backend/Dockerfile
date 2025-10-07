@@ -1,20 +1,12 @@
-# Sử dụng Node 18 Alpine
-FROM node:18-alpine
+# Dockerfile
+FROM node:20-alpine
 
-# Tạo thư mục làm việc trong container
 WORKDIR /app
 
-# Sao chép file package.json và package-lock.json trước
 COPY package*.json ./
+RUN npm ci --only=production
 
-# Cài đặt dependencies
-RUN npm install
-
-# Sao chép toàn bộ mã nguồn vào container
 COPY . .
 
-# Expose cổng 5000 (hoặc port app bạn đang dùng)
-EXPOSE 5000
-
-# Lệnh khởi chạy ứng dụng
+EXPOSE 3000
 CMD ["npm", "start"]
