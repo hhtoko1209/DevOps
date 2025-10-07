@@ -18,13 +18,15 @@ jobs:
 
       - name: Install deps
         run: npm ci
+        working-directory: backend
 
       - name: Run tests
         run: npm test --if-present
+        working-directory: backend
 
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./backend
           load: true
-          tags: devops5:ci
+          tags: demo5:ci
